@@ -42,11 +42,13 @@ def get_export_contents(images: List[Dict], prefix: str, output_dir: str) -> Dic
 
     contents = {}
 
+    labels = ['0.00001', '0.00005', '0.0001', '0.0002', '0.00025', '0.0003', '0.0004', '0.0005', '0.00075', '0.001', '0.002', '0.004', '0.005', '0.01', '0.02', '0.03', '0.04', '0.05', '0.1', 'throughput', 'med_fairness', 'max_fairness']
+
     for image_dict in images:
 
         file_ext = image_dict["content_type"].split("/", 1)[1].split("+", 1)[0]
         filename = "{}_cell_{}_output_{}.{}".format(
-            prefix, image_dict["cell_idx"], image_dict["output_idx"], file_ext
+            prefix, image_dict["cell_idx"], labels[images.index(image_dict)], file_ext
         )
         filepath = output_dir + os.sep + filename
 
